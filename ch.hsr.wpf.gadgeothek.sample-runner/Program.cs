@@ -35,13 +35,13 @@ namespace ch.hsr.wpf.gadgeothek.runner
                 // change something
                 x => x.Condition = Condition.Waste);
 
-            var max = new Customer("Max", "12345", "max@hsr.ch", "20151113");
+            var max = new Customer("Moritz", "12345", "moritz@hsr.ch", "20151113");
             sample.ShowAdminInteractionWithGenericInterface(
                 max,
                 // get id (student number)
                 x => x.Studentnumber,
                 // change something
-                x => x.Email = "max2@hsr.ch");
+                x => x.Name = "Moritz der 1.");
             
 
             sample.ShowUserInteraction();

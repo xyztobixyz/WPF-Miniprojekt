@@ -188,12 +188,12 @@ namespace ch.hsr.wpf.gadgeothek.runner
         public void ShowUserInteraction()
         {
             var service = new LibraryService(ServerUrl);
-            if (!service.Register("max.muster@hsr.ch", "12345", "Max", "9918"))
+            if (!service.Register("matt.muster@hsr.ch", "12345", "Matt", "9919"))
             {
                 Console.WriteLine("Sorry, registration did not work...");
                 return;
             }
-            if (!service.Login("max.muster@hsr.ch", "12345"))
+            if (!service.Login("matt.muster@hsr.ch", "12345"))
             {
                 Console.WriteLine("Sorry, not authorized");
                 return;
