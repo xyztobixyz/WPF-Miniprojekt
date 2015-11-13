@@ -40,17 +40,9 @@ namespace ch.hsr.wpf.gadgeothek.domain
             ReturnDate = returnDate;
         }
 
-        public bool IsLent()
-        {
-            return ReturnDate == null;
-        }
+        public bool IsLent => ReturnDate == null;
 
-        public bool IsOverdue()
-        {
-            if (!IsLent())
-                return false;
-            return OverDueDate < DateTime.Now;
-        }
+        public bool IsOverdue => IsLent && OverDueDate < DateTime.Now;
 
 
         public override string ToString()
