@@ -21,8 +21,13 @@ Setzen Sie diesen Code in Ihrem Miniprojekt ein, um Zeit und Aufwand zu sparen. 
 
 
 ---
-# NuGet-Packages
+## Verwendete NuGet-Packages
 Die Projektvorlage nutzt folgende NuGet-Packages. Diese sind nicht auf GitHub, sondern müssen in Visual Studio vor der ersten Verwendung heruntergeladen werden. Ein entsprechender Hinweis müsste eigentlich in Visual Studio angezeigt werden, wenn Sie die Projektvorlage heruntergeladen haben und ein erstes mal Kompilieren.
 
-* __Newtonsoft.Json__: Bibliothek mit sehr reichhaltigen Optionen zur Serialisierung von Objekten in JSON. Weitere Infos dazu finden Sie hier: http://www.newtonsoft.com/json
-* __RestSharp__: Bibliothek, welche den Zugriff auf ein REST API stark vereinfacht. Weitere Infos dazu finden Sie hier: http://restsharp.org/ 
+* __Newtonsoft.Json__:
+
+  Bibliothek mit sehr reichhaltigen Optionen zur Serialisierung von Objekten in JSON. Weitere Infos dazu finden Sie hier: http://www.newtonsoft.com/json
+
+* __RestSharp__: 
+
+  Bibliothek, welche den Zugriff auf ein REST API stark vereinfacht. Weitere Infos dazu finden Sie hier: http://restsharp.org/ 
