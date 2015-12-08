@@ -29,7 +29,7 @@ namespace ch.hsr.wpf.gadgeothek.domain
             if (this == obj)
                 return true;
             var other = obj as Reservation;
-            if (obj == null)
+            if (other == null)
                 return false;
             if (Id == null)
                 return other.Id == null;

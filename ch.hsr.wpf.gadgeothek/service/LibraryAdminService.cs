@@ -110,7 +110,7 @@ namespace ch.hsr.wpf.gadgeothek.service
 
         public bool UpdateCustomer(Customer obj)
         {
-            return UpdateItem(obj, obj.Email);
+            return UpdateItem(obj, obj.Studentnumber);
         }
 
         public bool UpdateLoan(Loan obj)
@@ -131,7 +131,7 @@ namespace ch.hsr.wpf.gadgeothek.service
 
         public bool DeleteCustomer(Customer obj)
         {
-            return DeleteItem(obj, obj.Email);
+            return DeleteItem(obj, obj.Studentnumber);
         }
 
         public bool DeleteLoan(Loan obj)
