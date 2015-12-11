@@ -17,6 +17,8 @@ namespace ch.hsr.wpf.gadgeothek.admin_gui
     
     public partial class MainWindow : Window
     {
+        private Gadget EditingGadget;
+
         private WebSocketClient ClientListener { get; set; }
 
         public LibraryAdminService Service { get; }
@@ -53,11 +55,11 @@ namespace ch.hsr.wpf.gadgeothek.admin_gui
 
             var bgTask = ClientListener.ListenAsync();
         }
-
+        
 
         private void NewGadgetButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var gadget = new Gadget();
+            var gadget = new Gadget("");
             gadget.Condition = (domain.Condition) InputComboCondition.SelectionBoxItem;
             gadget.Manufacturer = InputGadgetName.Text;
             gadget.Price = Double.Parse(InputGadgetPrice.Text);
@@ -67,18 +69,19 @@ namespace ch.hsr.wpf.gadgeothek.admin_gui
 
         private void DeleteGadget_OnClick(object sender, RoutedEventArgs e)
         {
-            var gadget = (Gadget) GadgetGrid.SelectedItem;
-            DeleteSelectedGadget(gadget);
+            var gadget = GadgetGrid.SelectedItem as Gadget;
+            if (gadget != null)
+            {
+                DeleteSelectedGadget(gadget);
+            }
         }
 
         private void GadgetGrid_OnCellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            if (GadgetGrid.SelectedItem != null)
-            {
-                var gadget = (Gadget) GadgetGrid.SelectedItem;
-                Service.UpdateGadget(gadget);
-            }
+            EditingGadget = e.Row.Item as Gadget;
         }
+
+
 
         public void DeleteSelectedGadget(Gadget gadget)
         {
@@ -91,10 +94,22 @@ namespace ch.hsr.wpf.gadgeothek.admin_gui
 
         private void GadgetGrid_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (GadgetGrid.SelectedItem != null)
+            if (e.Key == Key.Delete)
             {
-                var gadget = (Gadget)GadgetGrid.SelectedItem;
-                DeleteSelectedGadget(gadget);
+                var gadget = GadgetGrid.SelectedItem as Gadget;
+                if (gadget != null)
+                {
+                    DeleteSelectedGadget(gadget);
+                }
+            }
+        }
+
+        private void GadgetGrid_OnSelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            if (EditingGadget != null)
+            {
+                Service.UpdateGadget(EditingGadget);
+                EditingGadget = null;
             }
         }
     }

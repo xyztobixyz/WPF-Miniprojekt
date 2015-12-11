@@ -21,7 +21,9 @@
                                       SelectionMode="Single" 
                                       CanUserDeleteRows="True" 
                                       CellEditEnding="GadgetGrid_OnCellEditEnding"
+                                      SelectedCellsChanged="GadgetGrid_OnSelectedCellsChanged"
                                       PreviewKeyDown="GadgetGrid_OnPreviewKeyDown">
+                                
                                 <DataGrid.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Name="DeleteGadget" Header="Delete Gadget" Click="DeleteGadget_OnClick" />
@@ -58,7 +60,7 @@
                     <DockPanel>
                         <DataGrid 
                             Name="LoanGrid" 
-                            CanUserSortColumns="False"
+                            CanUserSortColumns="True"
                             DockPanel.Dock="Left" 
                             ItemsSource="{Binding}"
                             MinWidth="300" />
