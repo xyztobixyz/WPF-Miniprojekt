@@ -1,4 +1,3 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
@@ -8,6 +7,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ch.hsr.wpf.gadgeothek.sample-runner", "ch.hsr.wpf.gadgeothek.sample-runner\ch.hsr.wpf.gadgeothek.sample-runner.csproj", "{59EF5F84-B7CC-4656-B98A-DB6F929633BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ch.hsr.wpf.gadgeothek.websockets-listener", "ch.hsr.wpf.gadgeothek.websockets-listener\ch.hsr.wpf.gadgeothek.websockets-listener.csproj", "{77AF1E5C-E408-4388-A4C0-C65FF3B00E86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ch.hsr.wpf.gadgeothek.admin-gui", "ch.hsr.wpf.gadgeothek.admin-gui\ch.hsr.wpf.gadgeothek.admin-gui.csproj", "{992F01B2-C2DF-4428-9BE6-0DDE0D345B1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +28,10 @@ Global
 		{77AF1E5C-E408-4388-A4C0-C65FF3B00E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77AF1E5C-E408-4388-A4C0-C65FF3B00E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77AF1E5C-E408-4388-A4C0-C65FF3B00E86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{992F01B2-C2DF-4428-9BE6-0DDE0D345B1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{992F01B2-C2DF-4428-9BE6-0DDE0D345B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{992F01B2-C2DF-4428-9BE6-0DDE0D345B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{992F01B2-C2DF-4428-9BE6-0DDE0D345B1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
