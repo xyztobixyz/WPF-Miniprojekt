@@ -39,7 +39,6 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100" />
@@ -53,7 +52,6 @@
                                 <TextBox Grid.Row="2" Grid.Column="1" Name="InputGadgetPrice" />
                                 <Label Grid.Row="3" Grid.Column="0" Content="Condition:" />
                                 <ComboBox Grid.Row="3" Grid.Column="1" Name="InputComboCondition" />
-                                <Label Grid.Row="4" Name="InputError" Grid.ColumnSpan="2"  Content="" />
                             </Grid>
                         </DockPanel>
                     </DockPanel>

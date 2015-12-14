@@ -50,30 +50,27 @@ namespace ch.hsr.wpf.gadgeothek.admin_gui
 
         private void NewGadgetButton_OnClick(object sender, RoutedEventArgs e)
         {
-            InputError.Content = "";
             try
             {
                 var gadget = new Gadget("");
                 gadget.Condition = (domain.Condition) InputComboCondition.SelectionBoxItem;
-                gadget.Manufacturer = InputGadgetName.Text;
+                gadget.Manufacturer = InputGadgetManufactruer.Text;
                 gadget.Price = Double.Parse(InputGadgetPrice.Text);
                 gadget.Name = InputGadgetName.Text;
                 Service.AddGadget(gadget);
-                InputError.Content = "";
             }
             catch (InvalidCastException)
             {
-                InputError.Content += "Condition wählen\n";
+                MessageBox.Show("Wähle Condition", "Error Adding Gadget", MessageBoxButton.OK);
             }
             catch (FormatException)
             {
-                InputError.Content += "Price als Nummer angeben\n";
+                MessageBox.Show("Price als Nummer angeben", "Error Adding Gadget", MessageBoxButton.OK);
             }
             catch (Exception)
             {
-                InputError.Content += "Bitte alle Felder ausfüllen";
+                MessageBox.Show("Bitte alle Felder ausfüllen", "Error Adding Gadget", MessageBoxButton.OK);
             }
-
         }
 
         private void DeleteGadget_OnClick(object sender, RoutedEventArgs e)
