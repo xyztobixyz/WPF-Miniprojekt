@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ch.hsr.wpf.gadgeothek.domain;
 using ch.hsr.wpf.gadgeothek.service;
 using ch.hsr.wpf.gadgeothek.websocket;
-using System.Threading.Tasks;
 
 namespace ch.hsr.wpf.gadgeothek.admin_gui
 {
@@ -29,42 +25,55 @@ namespace ch.hsr.wpf.gadgeothek.admin_gui
 
         public MainWindow()
         {
+            InitializeComponent();
             DataContext = this;
 
             ServerUrl = "http://localhost:8080";
             Service = new LibraryAdminService(ServerUrl);
             ClientListener = new WebSocketClient(ServerUrl);
+            ClientListener.NotificationReceived += ClientListenerNotified;
+            ClientListener.ListenAsync();
 
             Gadgets = new ObservableCollection<Gadget>(Service.GetAllGadgets());
             Loans = new ObservableCollection<Loan>(Service.GetAllLoans());
-
-            ClientListener.NotificationReceived += (o, e) =>
-            {
-                Gadgets.Clear();
-                Loans.Clear();
-                foreach (var gadget in Service.GetAllGadgets()){ Gadgets.Add(gadget); }
-                foreach (var loan in Service.GetAllLoans()) { Loans.Add(loan); }
-            };
-
-            InitializeComponent();
             
-            GadgetGrid.DataContext = Gadgets;
-            LoanGrid.DataContext = Loans;
-
             InputComboCondition.ItemsSource = Enum.GetValues(typeof(domain.Condition)).Cast<domain.Condition>();
-
-            var bgTask = ClientListener.ListenAsync();
         }
-        
+
+        private void ClientListenerNotified(object o, WebSocketClientNotificationEventArgs e)
+        {
+            Gadgets.Clear();
+            Loans.Clear();
+            foreach (var gadget in Service.GetAllGadgets()) { Gadgets.Add(gadget); }
+            foreach (var loan in Service.GetAllLoans()) { Loans.Add(loan); }
+        }
 
         private void NewGadgetButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var gadget = new Gadget("");
-            gadget.Condition = (domain.Condition) InputComboCondition.SelectionBoxItem;
-            gadget.Manufacturer = InputGadgetName.Text;
-            gadget.Price = Double.Parse(InputGadgetPrice.Text);
-            gadget.Name = InputGadgetName.Text;
-            Service.AddGadget(gadget);
+            InputError.Content = "";
+            try
+            {
+                var gadget = new Gadget("");
+                gadget.Condition = (domain.Condition) InputComboCondition.SelectionBoxItem;
+                gadget.Manufacturer = InputGadgetName.Text;
+                gadget.Price = Double.Parse(InputGadgetPrice.Text);
+                gadget.Name = InputGadgetName.Text;
+                Service.AddGadget(gadget);
+                InputError.Content = "";
+            }
+            catch (InvalidCastException)
+            {
+                InputError.Content += "Condition wählen\n";
+            }
+            catch (FormatException)
+            {
+                InputError.Content += "Price als Nummer angeben\n";
+            }
+            catch (Exception)
+            {
+                InputError.Content += "Bitte alle Felder ausfüllen";
+            }
+
         }
 
         private void DeleteGadget_OnClick(object sender, RoutedEventArgs e)
