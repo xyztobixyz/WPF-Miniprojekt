@@ -6,23 +6,39 @@
         xmlns:local="clr-namespace:ch.hsr.wpf.gadgeothek.admin_gui"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="RessourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <DockPanel Name="MainPanel">
-            <TabControl>
-                <TabItem Header="Gadgets">
-                    <DockPanel>
+        <DockPanel Name="MainPanel" Style="{StaticResource FancyDockpanel}">
+            <TabControl Style="{StaticResource FancyTabControl}">
+                <TabItem Header="Gadgets" Style="{StaticResource FancyTabItem}">
+                    <DockPanel Style="{StaticResource FancyDockpanel}">
                         <DockPanel DockPanel.Dock="Left" >
                             <DataGrid Name="GadgetGrid" 
+                                      IsReadOnly="True"
                                       CanUserSortColumns="True" 
                                       ItemsSource="{Binding Path=Gadgets}" 
                                       DockPanel.Dock="Top" 
                                       MinWidth="300" 
                                       MinHeight="250" 
+                                      RowHeaderWidth="0"
                                       SelectionMode="Single" 
+                                      AlternatingRowBackground="#222222"
+                                      RowBackground="Black"
                                       CanUserDeleteRows="True" 
                                       CellEditEnding="GadgetGrid_OnCellEditEnding"
                                       SelectedCellsChanged="GadgetGrid_OnSelectedCellsChanged"
-                                      PreviewKeyDown="GadgetGrid_OnPreviewKeyDown">
+                                      PreviewKeyDown="GadgetGrid_OnPreviewKeyDown"
+                                      AlternationCount="2"
+                                      Background="Black"
+                                      BorderThickness="0"
+                                      ColumnHeaderStyle="{StaticResource FancyDataGridHeader}"
+                                      RowStyle="{StaticResource FancyDataGridRow}">
                                 
                                 <DataGrid.ContextMenu>
                                     <ContextMenu>
@@ -31,8 +47,9 @@
                                 </DataGrid.ContextMenu>
                             </DataGrid>
                         </DockPanel>
-                        <DockPanel>
-                            <Button DockPanel.Dock="Bottom" Name="NewGadgetButton" Content="Add Gadget" Click="NewGadgetButton_OnClick" />
+                        <DockPanel Margin="0 0 5 0">
+                            <Button Style="{StaticResource FancyButton}" DockPanel.Dock="Bottom" Name="DeleteGadgetButton" Content="Delete Gadget" Click="DeleteGadget_OnClick"></Button>
+                            <Button Style="{StaticResource FancyButton}" DockPanel.Dock="Bottom" Name="NewGadgetButton" Content="Add Gadget" Click="NewGadgetButton_OnClick" />
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -44,24 +61,31 @@
                                     <ColumnDefinition Width="100" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Content="Name:" />
-                                <TextBox Grid.Row="0" Grid.Column="1" Name="InputGadgetName" />
-                                <Label Grid.Row="1" Grid.Column="0" Content="Manufacturer:" />
-                                <TextBox Grid.Row="1" Grid.Column="1" Name="InputGadgetManufactruer" />
-                                <Label Grid.Row="2" Grid.Column="0" Content="Price:" />
-                                <TextBox Grid.Row="2" Grid.Column="1" Name="InputGadgetPrice" />
-                                <Label Grid.Row="3" Grid.Column="0" Content="Condition:" />
-                                <ComboBox Grid.Row="3" Grid.Column="1" Name="InputComboCondition" />
+                                <Label Style="{StaticResource FancyLabel}" Grid.Row="0" Grid.Column="0" Content="Name:" />
+                                <TextBox Style="{StaticResource FancyTextBox}" Grid.Row="0" Grid.Column="1" Name="InputGadgetName" />
+                                <Label Style="{StaticResource FancyLabel}" Grid.Row="1" Grid.Column="0" Content="Manufacturer:" />
+                                <TextBox Style="{StaticResource FancyTextBox}" Grid.Row="1" Grid.Column="1" Name="InputGadgetManufactruer" />
+                                <Label Style="{StaticResource FancyLabel}" Grid.Row="2" Grid.Column="0" Content="Price:" />
+                                <TextBox  Style="{StaticResource FancyTextBox}" Grid.Row="2" Grid.Column="1" Name="InputGadgetPrice" />
+                                <Label Style="{StaticResource FancyLabel}" Grid.Row="3" Grid.Column="0" Content="Condition:" />
+                                <ComboBox Style="{StaticResource FancyComboBox}" ItemContainerStyle="{StaticResource FancyComboBoxItem}" Grid.Row="3" Grid.Column="1" Name="InputComboCondition" />
                             </Grid>
                         </DockPanel>
                     </DockPanel>
                 </TabItem>
-                <TabItem Header="Reservations">
+                <TabItem Header="Reservations" Style="{StaticResource FancyTabItem}">
                     <DockPanel>
                         <DataGrid 
+                            Background="Black"
                             Name="LoanGrid" 
                             CanUserSortColumns="True"
                             DockPanel.Dock="Left" 
+                                                                  RowHeaderWidth="0"
+
+                            AlternatingRowBackground="#222222"
+                                      RowBackground="Black"
+                            ColumnHeaderStyle="{StaticResource FancyDataGridHeader}"
+                                      RowStyle="{StaticResource FancyDataGridRow}"
                             ItemsSource="{Binding Path=Loans}"
                             MinWidth="300" />
                     </DockPanel>

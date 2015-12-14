@@ -7,15 +7,16 @@ using System.Windows.Input;
 using ch.hsr.wpf.gadgeothek.domain;
 using ch.hsr.wpf.gadgeothek.service;
 using ch.hsr.wpf.gadgeothek.websocket;
+using static System.Double;
 
 namespace ch.hsr.wpf.gadgeothek.admin_gui
 {
     
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        private Gadget EditingGadget;
+        private Gadget _editingGadget;
 
-        private WebSocketClient ClientListener { get; set; }
+        private WebSocketClient ClientListener { get;}
 
         public LibraryAdminService Service { get; }
         public string ServerUrl { get; }
@@ -52,11 +53,13 @@ namespace ch.hsr.wpf.gadgeothek.admin_gui
         {
             try
             {
-                var gadget = new Gadget("");
-                gadget.Condition = (domain.Condition) InputComboCondition.SelectionBoxItem;
-                gadget.Manufacturer = InputGadgetManufactruer.Text;
-                gadget.Price = Double.Parse(InputGadgetPrice.Text);
-                gadget.Name = InputGadgetName.Text;
+                var gadget = new Gadget("")
+                {
+                    Condition = (domain.Condition) InputComboCondition.SelectionBoxItem,
+                    Manufacturer = InputGadgetManufactruer.Text,
+                    Price = Parse(InputGadgetPrice.Text),
+                    Name = InputGadgetName.Text
+                };
                 Service.AddGadget(gadget);
             }
             catch (InvalidCastException)
@@ -84,7 +87,7 @@ namespace ch.hsr.wpf.gadgeothek.admin_gui
 
         private void GadgetGrid_OnCellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            EditingGadget = e.Row.Item as Gadget;
+            _editingGadget = e.Row.Item as Gadget;
         }
 
 
@@ -112,10 +115,10 @@ namespace ch.hsr.wpf.gadgeothek.admin_gui
 
         private void GadgetGrid_OnSelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            if (EditingGadget != null)
+            if (_editingGadget != null)
             {
-                Service.UpdateGadget(EditingGadget);
-                EditingGadget = null;
+                Service.UpdateGadget(_editingGadget);
+                _editingGadget = null;
             }
         }
     }
